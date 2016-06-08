@@ -24,14 +24,5 @@ namespace PhoneBook_Console
             this.Name = Name;
             this.phoneNumber = phoneNumber;
         }
-        //public bool Findname(PhoneBookItem sp)
-        //{
-        //    return sp.lastName.Contains(lastName);
-        //}
-        //public bool Findnumber(PhoneBookItem sp)
-        //{
-        //    return sp.Number == Number;
-        //}
-
     }
 }
