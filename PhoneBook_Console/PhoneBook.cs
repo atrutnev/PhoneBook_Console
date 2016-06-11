@@ -62,7 +62,7 @@ namespace PhoneBook_Console
             Console.WriteLine("Введите порядковый номер абонента: ");
             int index = int.Parse(Console.ReadLine());
             abonents.RemoveAt(index - 1);
-            //Правильная расстановка порядковых номеров записей на основе индекса List<>
+            //Правильная расстановка порядковых номеров записей после удаления одной из них на основе индекса List<>
             foreach (var s in abonents)
             {
                 if (s.index != abonents.IndexOf(s) + 1)
@@ -115,7 +115,7 @@ namespace PhoneBook_Console
                         Console.ReadKey();
                         break;
                     }
-                    //Если введены буквы, то поиск производится по номеру абонента.
+                    //Если введены цифры, то поиск производится по номеру абонента.
                     else if (char.IsDigit(c))
                     {
                         List<Abonent> abonentsSearch = abonents.FindAll(t => t.phoneNumber.Equals(int.Parse(stringSearch)));
