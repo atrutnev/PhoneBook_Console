@@ -12,8 +12,10 @@ namespace PhoneBook_Console
     {
         static void Main(string[] args)
         {
+            //Инициализация класса
             var pb = new PhoneBook();
 
+            //Главное меню
             while (true)
             {
                 Console.Clear();
@@ -36,6 +38,7 @@ namespace PhoneBook_Console
 
                 string com = Console.ReadLine();
 
+                //Команды меню
                 switch (com)
                 {
                     case "1":

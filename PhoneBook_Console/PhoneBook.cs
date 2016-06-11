@@ -12,13 +12,17 @@ namespace PhoneBook_Console
 {
     public class PhoneBook : IEnumerable<Abonent>
     {
+        //Инициализация List
         public List<Abonent> abonents;
-
+        
+        //Инициализация класса
         public PhoneBook()
         {
             this.abonents = GetAbonents();
         }
 
+        //Начальное заполнение списка. Если в директории с программой присутствует файл "AbonentsList.xml",
+        //заполнить список значениями из него. В противном случае - вернуть пустой список.
         private static List<Abonent> GetAbonents()
         {
             List<Abonent> list = new List<Abonent>();
@@ -35,13 +39,14 @@ namespace PhoneBook_Console
             return list;
         }
 
-        
+        //Метод добавления записи
         public void AddAbonent()
         {
             Console.WriteLine("Введите имя: ");
             string Name = Console.ReadLine();
             Console.WriteLine("Введите номер: ");
             int phoneNumber = int.Parse(Console.ReadLine());
+            //Простановка порядкового номера записи
             if (abonents.Count > 0)
             {
                 int i = abonents.Count + 1;
@@ -50,11 +55,14 @@ namespace PhoneBook_Console
             else abonents.Add(new Abonent(1, Name, phoneNumber));
         }
 
+
+        //Метод удаления записи
         public void DeleteAbonent()
         {
             Console.WriteLine("Введите порядковый номер абонента: ");
             int index = int.Parse(Console.ReadLine());
             abonents.RemoveAt(index - 1);
+            //Правильная расстановка порядковых номеров записей на основе индекса List<>
             foreach (var s in abonents)
             {
                 if (s.index != abonents.IndexOf(s) + 1)
@@ -65,6 +73,7 @@ namespace PhoneBook_Console
             }
         }
 
+        //Метод изменения записи
         public void ModifyAbonent()
         {
             Console.WriteLine("Введите порядковый номер абонента:");
@@ -75,6 +84,7 @@ namespace PhoneBook_Console
             abonents[index - 1].phoneNumber = int.Parse(Console.ReadLine());
         }
 
+        //Метод поиска записи
         public void SearchAbonent()
         {
             Console.WriteLine("Введите первые буквы имени или номер: ");
@@ -88,10 +98,12 @@ namespace PhoneBook_Console
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Результаты поиска:");
 
+            //Если строка поиска непустая
             if (stringSearch != null)
             {
                 foreach (var c in stringSearch)
                 {
+                    //Если введены буквы, то поиск производится по имени абонента. 
                     if (char.IsLetter(c))
                     {
                         List<Abonent> abonentsSearch = abonents.FindAll(t => t.Name.ToLower().StartsWith(stringSearch));
@@ -103,6 +115,7 @@ namespace PhoneBook_Console
                         Console.ReadKey();
                         break;
                     }
+                    //Если введены буквы, то поиск производится по номеру абонента.
                     else if (char.IsDigit(c))
                     {
                         List<Abonent> abonentsSearch = abonents.FindAll(t => t.phoneNumber.Equals(int.Parse(stringSearch)));
@@ -123,6 +136,7 @@ namespace PhoneBook_Console
             }
         }
 
+        //Вывод списка на экран
         public void ListAbonents()
         {
             foreach (var d in abonents)
@@ -131,6 +145,7 @@ namespace PhoneBook_Console
             }
         }
 
+        //Метод сохранения списка в файл "Abonents.xml" в директорию с программой.
         public void SaveAbonentsToXml()
         {
             var serializer = new XmlSerializer(typeof(List<Abonent>));
