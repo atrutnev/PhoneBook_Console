@@ -18,6 +18,11 @@ namespace PhoneBook_Console
         {
             return String.Format("{0}. {1} - {2}", index, Name, phoneNumber);
         }
+
+        public Abonent()
+        {
+
+        }
         public Abonent(int index, string Name, int phoneNumber)
         {
             this.index = index;

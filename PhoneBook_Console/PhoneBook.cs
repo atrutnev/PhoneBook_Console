@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PhoneBook_Console
 {
@@ -20,6 +22,16 @@ namespace PhoneBook_Console
         private static List<Abonent> GetAbonents()
         {
             List<Abonent> list = new List<Abonent>();
+            var filename = "AbonentsList.xml";
+            if (File.Exists(filename))
+            {
+                var xml = string.Empty;
+                xml = File.ReadAllText(filename);
+                var serializer = new XmlSerializer(typeof(List<Abonent>));
+                var reader = new StringReader(xml);
+                list = serializer.Deserialize(reader) as List<Abonent>;
+                return list;
+            }      
             return list;
         }
 
@@ -111,13 +123,21 @@ namespace PhoneBook_Console
             }
         }
 
-
         public void ListAbonents()
         {
             foreach (var d in abonents)
             {
                 Console.WriteLine(d);
             }
+        }
+
+        public void SaveAbonentsToXml()
+        {
+            var serializer = new XmlSerializer(typeof(List<Abonent>));
+            var writer = new StringWriter();
+            serializer.Serialize(writer, abonents);
+            var xml = writer.ToString();
+            File.WriteAllText("AbonentsList.xml", xml);
         }
 
         public IEnumerator<Abonent> GetEnumerator()

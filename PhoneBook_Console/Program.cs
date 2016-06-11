@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,7 @@ namespace PhoneBook_Console
     {
         static void Main(string[] args)
         {
-            
             var pb = new PhoneBook();
-
 
             while (true)
             {
@@ -30,7 +29,7 @@ namespace PhoneBook_Console
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine((new string('=', 79)));
                 Console.WriteLine("Команды меню: ");
-                Console.WriteLine("1.Создать запись\n2.Удалить запись\n3.Изменить запись\n4.Поиск\n5.Выход");
+                Console.WriteLine("1.Создать запись\n2.Удалить запись\n3.Изменить запись\n4.Поиск\n5.Сохранить список и выйти\n6.Выход без сохранения");
                 Console.WriteLine((new string('=', 79)));
                 Console.Write("Введите команду: ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -52,6 +51,9 @@ namespace PhoneBook_Console
                         pb.SearchAbonent();
                          break;
                     case "5":
+                        pb.SaveAbonentsToXml();
+                        return;
+                    case "6":
                         return;
                     default:
                         Console.WriteLine("Недопустимая команда.\n");
