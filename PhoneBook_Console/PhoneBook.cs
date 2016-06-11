@@ -53,6 +53,16 @@ namespace PhoneBook_Console
             }
         }
 
+        public void ModifyAbonent()
+        {
+            Console.WriteLine("Введите порядковый номер абонента:");
+            int index = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите новое имя абонента: ");
+            abonents[index - 1].Name = Console.ReadLine();
+            Console.WriteLine("Введите новый номер абонента: ");
+            abonents[index - 1].phoneNumber = int.Parse(Console.ReadLine());
+        }
+
         public void SearchAbonent()
         {
             Console.WriteLine("Введите первые буквы имени или номер: ");

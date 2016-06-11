@@ -30,7 +30,7 @@ namespace PhoneBook_Console
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine((new string('=', 79)));
                 Console.WriteLine("Команды меню: ");
-                Console.WriteLine("1.Создать запись\n2.Удалить запись\n3.Поиск\n4.Выход");
+                Console.WriteLine("1.Создать запись\n2.Удалить запись\n3.Изменить запись\n4.Поиск\n5.Выход");
                 Console.WriteLine((new string('=', 79)));
                 Console.Write("Введите команду: ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -46,9 +46,12 @@ namespace PhoneBook_Console
                         pb.DeleteAbonent();
                         break;
                     case "3":
+                        pb.ModifyAbonent();
+                        break;
+                    case "4":
                         pb.SearchAbonent();
                          break;
-                    case "4":
+                    case "5":
                         return;
                     default:
                         Console.WriteLine("Недопустимая команда.\n");
